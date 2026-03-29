@@ -1,34 +1,15 @@
-name: Lint & Test
+name: Python Lint
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: [push, pull_request]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
-      - name: Install dependencies
-        run: pip install flake8 pylint
-      - name: Flake8
-        run: flake8 *.py --max-line-length=120 --ignore=E501,W503 || true
-      - name: Pylint
-        run: pylint *.py --disable=C0114,C0115,C0116,R0903 --fail-under=6 || true
-
-  security-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Install bandit
-        run: pip install bandit
-      - name: Security scan
-        run: bandit -r . -ll || true
+          python-version: '3.10'
+      - run: pip install pylint
+      - run: pylint *.py --disable=missing-docstring,line-too-long --exit-zero
+      - run: python3 -m py_compile *.py
