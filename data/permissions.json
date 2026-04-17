@@ -1,0 +1,77 @@
+{
+  "categories": {
+    "location": [
+      "ACCESS_FINE_LOCATION",
+      "ACCESS_COARSE_LOCATION",
+      "ACCESS_BACKGROUND_LOCATION"
+    ],
+    "contacts": [
+      "READ_CONTACTS",
+      "WRITE_CONTACTS",
+      "GET_ACCOUNTS"
+    ],
+    "call_log": [
+      "READ_CALL_LOG",
+      "WRITE_CALL_LOG",
+      "PROCESS_OUTGOING_CALLS"
+    ],
+    "sms": [
+      "READ_SMS",
+      "SEND_SMS",
+      "RECEIVE_SMS"
+    ],
+    "biometric": [
+      "USE_BIOMETRIC",
+      "USE_FINGERPRINT"
+    ],
+    "sensors": [
+      "BODY_SENSORS",
+      "ACTIVITY_RECOGNITION"
+    ],
+    "camera_audio": [
+      "CAMERA",
+      "RECORD_AUDIO"
+    ],
+    "storage": [
+      "READ_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE",
+      "READ_MEDIA_IMAGES",
+      "READ_MEDIA_VIDEO",
+      "READ_MEDIA_AUDIO"
+    ],
+    "phone": [
+      "READ_PHONE_STATE",
+      "READ_PHONE_NUMBERS",
+      "ANSWER_PHONE_CALLS"
+    ],
+    "bluetooth": [
+      "BLUETOOTH_SCAN",
+      "BLUETOOTH_CONNECT",
+      "BLUETOOTH_ADVERTISE"
+    ]
+  },
+  "risk_levels": {
+    "critical": [
+      "READ_SMS",
+      "READ_CALL_LOG",
+      "RECORD_AUDIO",
+      "CAMERA",
+      "ACCESS_FINE_LOCATION"
+    ],
+    "high": [
+      "READ_CONTACTS",
+      "READ_EXTERNAL_STORAGE",
+      "BODY_SENSORS"
+    ],
+    "medium": [
+      "SEND_SMS",
+      "ACCESS_COARSE_LOCATION",
+      "GET_ACCOUNTS"
+    ],
+    "low": [
+      "USE_VIBRATOR",
+      "INTERNET",
+      "CHANGE_NETWORK_STATE"
+    ]
+  }
+}
