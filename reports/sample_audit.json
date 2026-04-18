@@ -1,0 +1,30 @@
+{
+  "scan_date": "2026-04-18T16:25:00Z",
+  "device": "Pixel 7",
+  "android_version": "14",
+  "apps_scanned": 42,
+  "dangerous_permissions_found": 15,
+  "top_offenders": [
+    {
+      "app": "com.facebook.katana",
+      "perms": [
+        "ACCESS_FINE_LOCATION",
+        "READ_CONTACTS",
+        "CAMERA"
+      ]
+    },
+    {
+      "app": "com.instagram.android",
+      "perms": [
+        "ACCESS_FINE_LOCATION",
+        "CAMERA"
+      ]
+    },
+    {
+      "app": "com.google.android.apps.maps",
+      "perms": [
+        "ACCESS_FINE_LOCATION"
+      ]
+    }
+  ]
+}
