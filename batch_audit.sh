@@ -1,24 +1,31 @@
 #!/bin/bash
-# batch_audit.sh -- Audit permissions on multiple devices
-# Usage: ./batch_audit.sh [output_dir]
-set -e
+# batch_audit.sh -- Audit permission patterns across multiple devices
+# Usage: ./batch_audit.sh
+# Connects to each device and runs permission audit, saves results
 
-OUT="${1:-.}"
-mkdir -p "$OUT"
+RESULTS_DIR="audit_results_$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$RESULTS_DIR"
 
-echo "🔍 Multi-Device Permission Audit"
-echo "Waiting for connected devices..."
-sleep 1
+echo "🔍 Batch Permission Auditor"
+echo "Scanning all connected devices...\n"
 
-while IFS= read -r line; do
-    [[ "$line" =~ "device" ]] || continue
-    serial=$(echo "$line" | awk '{print $1}')
-    [[ -z "$serial" ]] && continue
-    
-    echo "Auditing: $serial"
-    model=$(adb -s "$serial" shell getprop ro.product.model 2>/dev/null || echo "unknown")
-    python3 permission_audit.py --csv "$OUT/${serial}_${model}_permissions.csv" 2>/dev/null || true
-done < <(adb devices)
+adb devices | tail -n +2 | grep -v "^$" | while read -r SERIAL _; do
+    if [[ "$SERIAL" == "emulator"* ]] || [[ "$SERIAL" == "127.0.0.1"* ]]; then
+        continue
+    fi
 
-echo "✅ Audits complete. Results in: $OUT/"
-ls -lh "$OUT"
+    MODEL=$(adb -s "$SERIAL" shell getprop ro.product.model 2>/dev/null)
+    ANDROID=$(adb -s "$SERIAL" shell getprop ro.build.version.release 2>/dev/null)
+
+    echo "📱 $MODEL (Android $ANDROID) [$SERIAL]"
+
+    # Run permission audit
+    python3 permission_audit.py --csv "$RESULTS_DIR/${SERIAL}_perms.csv" 2>/dev/null &
+
+done
+
+wait
+
+echo "\n✅ Results saved to: $RESULTS_DIR"
+echo "Files:"
+ls -lh "$RESULTS_DIR"
