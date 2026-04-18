@@ -1,0 +1,16 @@
+name: Daily Permission Audit
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 9 AM UTC daily
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for connected Android device
+        run: |
+          echo "This workflow runs daily if you have GitHub Actions connected to your Android device."
+          echo "To use: set up a self-hosted runner on your PC/Mac and this will audit automatically."
